@@ -1,10 +1,7 @@
 export default function cleanSet(set, startString) {
-  if (startString === '') {
-    return startString;
-  }
   let myStr = '';
   for (const elem of set) {
-    if (elem.startsWith(startString) === true) {
+    if (elem.startsWith(startString) === true && startString.length > 0) {
       const subStr = elem.substring(startString.length, elem.length);
       myStr = myStr.concat(`${subStr}-`);
     }
