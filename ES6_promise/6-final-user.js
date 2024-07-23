@@ -6,20 +6,20 @@ export default async function handleProfileSignup(firstName, lastName, fileName)
   try {
     await signUpUser(firstName, lastName).then((result) => {
       obj = [{
-        status: '<fulfilled>',
+        status: 'fulfilled',
         value: result,
       }];
     });
     await uploadPhoto(fileName).then((result) => {
       obj = [{
-        status: '<fulfilled>',
+        status: 'fulfilled',
         value: result,
       }];
     });
   } catch (e) {
     obj = [
       {
-        status: '<rejected>',
+        status: 'rejected',
         value: e,
       },
     ];
