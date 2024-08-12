@@ -14,7 +14,7 @@ async def wait_n(n: int, max_delay: int) -> typing.List[float]:
     delay_list = await asyncio.gather(*tasks)
     asc_lst = []
     for i in range(0, len(delay_list)):
-        asc_lst.append(max(delay_list))
-        delay_list.remove(max(delay_list))
+        asc_lst.append(min(delay_list))
+        delay_list.remove(min(delay_list))
 
     return asc_lst
