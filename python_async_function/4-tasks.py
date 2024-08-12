@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+"""Contains asynchronous coroutine task_wait_n"""
 import asyncio
 import typing
 task_wait_random = __import__('3-tasks').task_wait_random
