@@ -2,10 +2,10 @@
 """Contais async_generator"""
 import random
 import asyncio
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Iterator
 
 
-async def async_generator() -> AsyncGenerator[int]:
+async def async_generator() -> AsyncGenerator[int, None]:
     """Returns an asynchronous generator.
     Yields values one after the other with yield, waiting
     one second before each yield"""
