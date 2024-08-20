@@ -1,6 +1,6 @@
 README for pagination
 
-LHS Bracker
+LHS Bracket
 gte -> greater than or equal
 gt -> greater than
 lte -> less than or equal
