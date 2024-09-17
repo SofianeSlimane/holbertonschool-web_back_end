@@ -2,7 +2,8 @@ const fs = require('node:fs');
 
 function countStudents(path) {
   try {
-    const dataLineByLine = fs.readFileSync(path, 'utf-8').split('\n');
+    const dataLineByLine = fs.readFileSync(path, 'utf-8').trimEnd().split('\n');
+
     console.log(`Number of students: ${dataLineByLine.length - 1}`);
 
     const fieldList = [];
