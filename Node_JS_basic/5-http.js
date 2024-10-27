@@ -9,6 +9,7 @@ const app = createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === '/') {
     res.write('Hello Holberton School!');
+    res.end();
   } else if (req.url === '/students') {
     async function countStudents(path) {
       await fs.readFile(path, 'utf-8')
@@ -57,7 +58,10 @@ const app = createServer((req, res) => {
     }
     countStudents(process.argv[2]);
   }
-});
+
+}
+
+);
 
 app.listen(port, hostname);
 
