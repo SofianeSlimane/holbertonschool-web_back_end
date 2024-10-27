@@ -31,7 +31,7 @@ async function countStudents(path) {
           }
         }
 
-        console.log(`Number of students in ${fld}: ${countStudentInField}. List: ${studentsBelongToField} `);
+        console.log(`Number of students in ${fld}: ${countStudentInField}. List: ${studentsBelongToField}`);
       }
     })
     .catch(() => {
