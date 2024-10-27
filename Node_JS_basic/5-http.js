@@ -18,6 +18,7 @@ const app = createServer((req, res) => {
           res.write('This is the list of our students\n');
           res.write(`Number of students: ${dataLineByLine.length - 1}\n`);
           res.statusCode = 200;
+          res.setHeader('Content-Type', 'text/plain');
           const fieldList = [];
           for (let i = 1; i < dataLineByLine.length; i += 1) {
             const line = dataLineByLine[i].split(',');
