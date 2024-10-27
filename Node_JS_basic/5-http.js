@@ -44,6 +44,7 @@ const app = createServer((req, res) => {
             res.write(`Number of students in ${fld}: ${countStudentInField}. List: ${studentsBelongToField}`);
           }
           res.write(''.trim());
+          res.statusCode = 200;
           res.end();
         })
         .catch(() => {
