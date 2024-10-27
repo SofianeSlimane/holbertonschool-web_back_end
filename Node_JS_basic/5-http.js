@@ -17,7 +17,7 @@ const app = createServer((req, res) => {
           const dataLineByLine = data.trimEnd().split('\n');
           res.write('This is the list of our students\n');
           res.write(`Number of students: ${dataLineByLine.length - 1}\n`);
-
+          res.statusCode = 200;
           const fieldList = [];
           for (let i = 1; i < dataLineByLine.length; i += 1) {
             const line = dataLineByLine[i].split(',');
@@ -49,7 +49,7 @@ const app = createServer((req, res) => {
             
           }
           
-          res.statusCode = 200;
+          
       
         })
         .catch(() => {
