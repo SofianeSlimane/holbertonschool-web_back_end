@@ -5,10 +5,11 @@ const hostname = '127.0.0.1';
 const port = 1245;
 
 const app = createServer((req, res) => {
-  res.statusCode = 200;
+  
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === '/') {
     res.write('Hello Holberton School!');
+    res.statusCode = 200;
     res.end();
   } else if (req.url === '/students') {
     async function countStudents(path) {
@@ -18,7 +19,7 @@ const app = createServer((req, res) => {
           res.write('This is the list of our students\n');
           res.write(`Number of students: ${dataLineByLine.length - 1}\n`);
           res.statusCode = 200;
-          res.setHeader('Content-Type', 'text/plain');
+          
           const fieldList = [];
           for (let i = 1; i < dataLineByLine.length; i += 1) {
             const line = dataLineByLine[i].split(',');
