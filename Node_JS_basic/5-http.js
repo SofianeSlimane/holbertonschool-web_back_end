@@ -25,10 +25,11 @@ const app = createServer((req, res) => {
               fieldList.push(field);
             }
           }
-
+          let fieldLiestLength = fieldList.length;
           for (const fld of fieldList) {
             let countStudentInField = 0;
             let studentsBelongToField = '';
+            fieldLiestLength -= 1;
             for (let i = 1; i < dataLineByLine.length; i += 1) {
               if (dataLineByLine[i].split(',').includes(fld)) {
                 const studentsInField = dataLineByLine[i].split(',')[0];
@@ -42,8 +43,11 @@ const app = createServer((req, res) => {
             }
 
             res.write(`Number of students in ${fld}: ${countStudentInField}. List: ${studentsBelongToField}`);
+             fieldLiestLength !== 0 ? res.write('\n') : ''
+            
+            
           }
-          res.write(''.trim());
+          
           res.statusCode = 200;
           res.end();
         })
