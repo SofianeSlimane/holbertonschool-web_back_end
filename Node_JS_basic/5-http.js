@@ -53,7 +53,8 @@ const app = createServer((req, res) => {
       
         })
         .catch(() => {
-          throw new Error('Cannot load the database');
+          res.write('Cannot load the database');
+          res.end()
         });
     }
     countStudents(process.argv[2]);
