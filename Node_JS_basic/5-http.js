@@ -1,23 +1,58 @@
 const { createServer } = require('node:http');
-const countStudents = require('./3-read_file_async');
+const fs = require('node:fs/promises');
+
 const hostname = '127.0.0.1';
 const port = 1245;
 
 const app = createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  if (req.url === '/'){
-    res.end('Hello Holberton School!');
+  if (req.url === '/') {
+    res.write('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    async function countStudents(path) {
+      await fs.readFile(path, 'utf-8')
+        .then((data) => {
+          const dataLineByLine = data.trimEnd().split('\n');
+
+          res.write(`Number of students: ${dataLineByLine.length - 1}\n`);
+
+          const fieldList = [];
+          for (let i = 1; i < dataLineByLine.length; i += 1) {
+            const line = dataLineByLine[i].split(',');
+            const field = line[3];
+            if (!fieldList.includes(field)) {
+              fieldList.push(field);
+            }
+          }
+
+          for (const fld of fieldList) {
+            let countStudentInField = 0;
+            let studentsBelongToField = '';
+            for (let i = 1; i < dataLineByLine.length; i += 1) {
+              if (dataLineByLine[i].split(',').includes(fld)) {
+                const studentsInField = dataLineByLine[i].split(',')[0];
+
+                studentsBelongToField += `${studentsInField}`;
+                if (i < dataLineByLine.length - 2) {
+                  studentsBelongToField += ', ';
+                }
+                countStudentInField += 1;
+              }
+            }
+
+            res.write(`Number of students in ${fld}: ${countStudentInField}. List: ${studentsBelongToField}`);
+          }
+          res.write(''.trim());
+          res.end();
+        })
+        .catch(() => {
+          throw new Error('Cannot load the database');
+        });
+    }
+    countStudents(process.argv[2]);
   }
-  else if (req.url === '/students'){
-    
-    
-    countStudents(process.argv[2])
-    .then((data) => {
-      res.write("This is the list of our students");
-    });
-    
-}});
+});
 
 app.listen(port, hostname);
 
