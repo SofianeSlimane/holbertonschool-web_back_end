@@ -15,7 +15,7 @@ const app = createServer((req, res) => {
       await fs.readFile(path, 'utf-8')
         .then((data) => {
           const dataLineByLine = data.trimEnd().split('\n');
-
+          res.write('This is the list of our students\n');
           res.write(`Number of students: ${dataLineByLine.length - 1}\n`);
 
           const fieldList = [];
@@ -44,13 +44,13 @@ const app = createServer((req, res) => {
             }
 
             res.write(`Number of students in ${fld}: ${countStudentInField}. List: ${studentsBelongToField}`);
-             fieldLiestLength !== 0 ? res.write('\n') : ''
+             fieldLiestLength !== 0 ? res.write('\n') : res.end()
             
             
           }
           
           res.statusCode = 200;
-          res.end();
+      
         })
         .catch(() => {
           throw new Error('Cannot load the database');
